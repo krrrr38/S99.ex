@@ -43,12 +43,12 @@ defmodule S99.ListTest do
     assert S99.List.reverse_fold([1, 1, 2, 3, 5, 8]) == [8, 5, 3, 2, 1, 1]
   end
 
-  test "isPalindrome: P06" do
-    assert S99.List.isPalindrome([]) == true
-    assert S99.List.isPalindrome([1, 2, 3, 2, 1]) == true
-    assert S99.List.isPalindrome([1, 2, 3, 3, 2, 1]) == true
-    assert S99.List.isPalindrome([1, 2, 3, 3, 2, 3]) == false
-    assert S99.List.isPalindrome([1, 2, 3, 2, 3]) == false
+  test "is_palindrome: P06" do
+    assert S99.List.is_palindrome([]) == true
+    assert S99.List.is_palindrome([1, 2, 3, 2, 1]) == true
+    assert S99.List.is_palindrome([1, 2, 3, 3, 2, 1]) == true
+    assert S99.List.is_palindrome([1, 2, 3, 3, 2, 3]) == false
+    assert S99.List.is_palindrome([1, 2, 3, 2, 3]) == false
   end
 
   test "flatten: P07" do
@@ -82,8 +82,8 @@ defmodule S99.ListTest do
   end
 
   test "encodeModified: P11" do
-    assert S99.List.encodeModified([]) == []
-    assert S99.List.encodeModified([:a, :a, :a, :a, :b, :c, :c, :a, :a, :d, :e, :e, :e, :e]) == [{:a, 4}, :b, {:c, 2}, {:a, 2}, :d, {:e, 4}]
+    assert S99.List.encode_modified([]) == []
+    assert S99.List.encode_modified([:a, :a, :a, :a, :b, :c, :c, :a, :a, :d, :e, :e, :e, :e]) == [{:a, 4}, :b, {:c, 2}, {:a, 2}, :d, {:e, 4}]
   end
 
   test "decode: P12" do
