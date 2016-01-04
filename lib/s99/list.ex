@@ -70,7 +70,7 @@ defmodule S99.List do
   """
   @spec reverse_fold(list) :: list
   def reverse_fold(list) when is_list(list) do
-    List.foldl(list, [], fn (x, acc) -> [x] ++ acc end)
+    List.foldl(list, [], fn (x, acc) -> [x|acc] end)
   end
 
   @doc """
@@ -86,7 +86,7 @@ defmodule S99.List do
   @spec flatten(list) :: list
   def flatten([]), do: []
   def flatten([h|t]) when is_list(h), do: h ++ flatten(t)
-  def flatten([h|t]), do: [h] ++ flatten(t)
+  def flatten([h|t]), do: [h|flatten(t)]
 
   @doc """
   P07: Flatten a nested list structure. `List.flatten/1`
@@ -94,7 +94,7 @@ defmodule S99.List do
   @spec flatten_all(list) :: list
   def flatten_all([]), do: []
   def flatten_all([h|t]) when is_list(h), do: flatten_all(h) ++ flatten_all(t)
-  def flatten_all([h|t]), do: [h] ++ flatten_all(t)
+  def flatten_all([h|t]), do: [h|flatten_all(t)]
 
   @doc """
   P08: Eliminate consecutive duplicates of list elements.
@@ -104,7 +104,7 @@ defmodule S99.List do
   def compress([h|t]), do: compress_loop(h, t)
   defp compress_loop(x, []), do: [x]
   defp compress_loop(x, [h|t]) when x == h, do: compress_loop(h, t)
-  defp compress_loop(x, [h|t]) when x != h, do: [x] ++ compress_loop(h, t)
+  defp compress_loop(x, [h|t]) when x != h, do: [x|compress_loop(h, t)]
 
   @doc """
   P09: Pack consecutive duplicates of list elements into sublists.
@@ -113,8 +113,8 @@ defmodule S99.List do
   def pack([]), do: []
   def pack([h|t]), do: pack_loop(h, [h], t)
   defp pack_loop(_, acc, []), do: [acc]
-  defp pack_loop(x, acc, [y|t]) when x == y, do: pack_loop(x, [y] ++ acc, t)
-  defp pack_loop(x, acc, [y|t]) when x != y, do: [acc] ++ pack_loop(y, [y], t)
+  defp pack_loop(x, acc, [y|t]) when x == y, do: pack_loop(x, [y|acc], t)
+  defp pack_loop(x, acc, [y|t]) when x != y, do: [acc|pack_loop(y, [y], t)]
 
   @doc """
   P10: Run-length encoding of a list.
